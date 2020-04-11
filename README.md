@@ -21,7 +21,7 @@ When the project is complete, we will be able to monitor a website to watch trai
 
 ## Structure<a name="structure"></a>
 
-This tree shows the repository structure. Only the project's main files are described.
+This tree shows the repository structure.
 
 ```
 .
@@ -88,17 +88,14 @@ This tree shows the repository structure. Only the project's main files are desc
 
 ## Requirements<a name="requirements"></a>
 
-It is assumed that the tools below are properly installed locally:
+It is assumed that you have a computer with at least **16GB RAM** and **4-core CPU**, and tools below are properly installed locally:
 
-- [Python](https://www.python.org/) 3.7
-- [pip](https://pip.pypa.io/en/stable/)
-- [Virtualenv](https://virtualenv.pypa.io/en/latest/)
-- [Docker Engine / Desktop](https://hub.docker.com/search/?type=edition&offering=community)
-- A computer with a minimum of 16gb+ RAM and a 4-core CPU
+- Python 3.7
+- Docker Engine / Desktop + Docker Compose
 
 ### Cloning the repository<a name="cloning-the-repository"></a>
 
-The first step is to clone this repository. Just type the following command in your Terminal:
+The first step is to clone this repository. Just type the following command in your terminal:
 
 ```bash
 # Clone the repository...
@@ -130,7 +127,7 @@ Open a new terminal session, or use the one you just used to clone the resposito
 $ docker-compose up --force-recreate --build
 ```
 
-Docker will run the services defined in the `docker-compose.yaml` file. If any of the images isn't found locally, Docker will download it. This process take awhile, so be patient; 10-15 minutes based on your internet connection and hardware.
+Docker will run the services defined in the file `docker-compose.yaml`. If any of the images isn't found locally, Docker will download it. This process take awhile, so be patient; 10-15 minutes based on your internet connection and hardware.
 
 #### Terminal 2: Producer<a name="terminal-2-producer"></a>
 
@@ -183,7 +180,7 @@ Now we are ready to run all the pieces.
 
 ## How to use<a name="how-to-use"></a>
 
-Once the Producer, Stream Processor and Consumer environments are set, we must execute the folling commands in the corresponding session:
+Once the Producer, Stream Processor and Consumer environments are set, we must execute the following commands in the corresponding session:
 
 - In **Terminal 1** we already have the architecture running, so nothing left to do here.
 - We must run the Producer in **Terminal 2**:
@@ -198,16 +195,16 @@ $ python simulation.py
 $ faust -A faust_stream worker -l info
 ```
 
-- It's time to create son tables in KSQL; let's do it in **Terminal 4**:
+- It's time to create some tables in KSQL; let's do it in **Terminal 4**:
 
 ```bash
 $ python ksql.py
 ```
 
-- And last, but not least, the Consumer. Also in **Terminal 4** run this command:
+- And last but not least, the Consumer. Also in **Terminal 4** run this command:
 
 ```bash
-$ python ksql.py
+$ python server.py
 ```
 
 At this point, you must have something like this:
@@ -218,7 +215,7 @@ Now, open your browser and navigate to `http://localhost:8888`. You will see the
 
 <img src="images/cta-status-page.jpg" width="600" alt="CTA Status Page">
 
-Let all the terminals working for a few minutes to see how the dashboard is automatically updated when new events are processed.
+Let all the terminal sessions working for a few minutes to see how the dashboard is automatically updated when new events are processed.
 
 ### Stopping the solution<a name="stopping-the-solution"></a>
 
